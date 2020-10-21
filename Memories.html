@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<style>
+body
+{
+	background-size: 100%;
+    background-color: #999b9b;
+	background-attachment: fixed;
+	margin: 0;
+	padding: 0;
+	min-width: 350px;
+}
+.nnome
+{
+	display: none;
+}
+nav
+{
+    background-color: #424949;
+    height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+}
+nav a{
+	font-size: 16pt;
+	font-family: 'Blippo';
+	color: white;
+	text-decoration: none;
+}
+
+nav a:hover
+{
+	color: rgb(184, 184, 184);
+}
+main
+{
+	width: auto;
+    height: auto;
+	margin-top: 60px;
+    position:absolute;
+    bottom:0;
+    top: 0;
+    left: 100px;
+    right: 100px;
+	background-color: #fff;
+	padding-bottom: 10px;
+	border: solid 1px black;
+}
+.miolo
+{
+    width: 300px;
+    height: 55px;
+    border: solid 1px black;
+    background-color: #424949;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    align-items: center;
+}
+
+
+#open
+{
+    text-align: center;
+}
+
+@media screen and (max-width: 955px)
+{
+	nav a
+	{
+		display: none;
+	}
+	main
+	{
+        left: 5px;
+        right: 5px;
+	}
+
+	.nnome{
+		display: inline;
+		font-size: 16pt;
+		font-family: 'Blippo';
+		color: white;
+		text-decoration: none;
+	}			
+}
+
+@media screen and (max-height: 390px)
+{
+	main
+	{
+        bottom:auto;
+        top: auto;
+	}			
+}
+</style>
+	<head>
+		<meta charset="utf-8">
+		<!-- <link rel="stylesheet" href="style.css"> -->
+		<script src="ww.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		
+		<meta name="viewport" content="width=device-width">
+		<title>Memories</title>
+
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="#">Memories</a>
+				<div class="nnome" >Memories</div>
+			</nav>
+		</header>
+		<main>
+            <div class="aqui" ></div>
+            <div id="m1" class="miolo">
+                <p id="open" style="color: #fff;">test en</p>
+            </div>
+
+            <div id="m2" class="miolo">
+                <p style="color: #fff;">audio</p>
+            </div>
+
+            <div id="m3" class="miolo">
+                <input id="m4" type="text" style="height: 49px; width: 225px;">
+                <button onclick="check()">Enviar</button>
+			</div>
+			
+
+        </main>
+
+<script>
+	let i = 0;
+	let nn = sorte();
+	let v = new Array;	
+
+    function home()
+	{
+		
+		let m3 = document.getElementById('m3');
+		let m4 = document.getElementById('m4');
+		
+		$("#m1").remove();
+		$("#m2").remove();
+
+		$('.aqui').append('<div id="m1" class="miolo"><p id="open" style="color: #fff;"> '+ ww[i].en + '</p> </div>');
+		$('.aqui').append('<div id="m2" class="miolo"> <audio id="m5" controls autoplay><source src="'+ ww[i].song +'" type="audio/mpeg"></audio> </div>');
+		//dd.classList.add("miolo2");
+		//dd.innerHTML = "test 11";	
+	}
+
+	home();
+
+	m4.addEventListener('keyup', function(e)
+	{
+		var key = e.which || e.keyCode;
+		if (key == 13) check();
+	});
+
+	function check()
+	{
+		let okok = "oi";
+		console.log(m4.value);
+		if(m4.value.toLowerCase() == ww[i].pt) 
+		{
+			m3.style.backgroundColor = "blue";
+			i++;
+			nn = sorte();
+			m3.style.backgroundColor = "#424949";
+			home();
+		}
+		
+		else m3.style.backgroundColor = "red";
+		m4.value = '';
+	}
+
+	function sorte()
+	{
+		let n1 = Math.floor(Math.random() * ww.length);
+		return n1;	
+	}
+
+</script>
+</body>
+</html>
